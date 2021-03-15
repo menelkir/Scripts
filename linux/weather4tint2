@@ -9,7 +9,7 @@
 # Addy
 
 # Open Weather Map API code, register to http://openweathermap.org to get one ;)
-API_KEY="af5d355b311aba0af66cf3c3951f9e5c"
+API_KEY=""
 
 # Check on http://openweathermap.org/find
 CITY_ID="3473964"
