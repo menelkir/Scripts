@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# m4a2mp3 1.0
+#
+# Convert m4a to mp3 without losing quality
+# It works with all files in a specific directory
+
+# Converting files to wav
+
+
+echo -e "\e[1m\e[93m1.  \e[97m Converting files to wav";
+for m4a in *.m4a; do
+	ffmpeg -stats -v 5 -y -i "${m4a}" "${m4a%.m4a}.wav";
+done
+
+# Delete remaining m4a
+echo -e "\e[1m\e[93m2.  \e[97mDeleting m4a files";
+rm *.m4a
+
+# Encoding to mp3
+echo -e "\e[1m\e[93m3.  \e[97mEnconding all wav to max quality mp3";
+for wav in *.wav;
+	do lame -V0 --preset extreme -h "${wav}" "${wav%.wav}.mp3";
+done
+
+# Deleting remaining wav files
+echo -e "\e[1m\e[93m4.  \e[97mDeleting wav files";
+rm *.wav
+
+echo -e "\e[1m\e[93m5.  \e[97mDone..."
+

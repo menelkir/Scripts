@@ -1,0 +1,37 @@
+#!/bin/bash
+#
+# Some emulators have a clusterfuck of roms, so I did this crap
+# I don't care if there's better methods to do that
+#
+
+mkdir {#,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z}
+
+mv 0* 1* 2* 3* 4* 5* 6* 7* 8* 9* "#" 
+
+mv A* A ;; mv a* A
+mv B* B ;; mv b* B
+mv C* C ;; mv c* C
+mv D* D ;; mv d* D
+mv E* E ;; mv e* E
+mv F* F ;; mv f* F
+mv G* G ;; mv g* G
+mv H* H ;; mv h* H
+mv I* I ;; mv i* I
+mv J* J ;; mv j* J
+mv K* K ;; mv k* K
+mv L* L ;; mv l* L
+mv M* M ;; mv m* M
+mv N* N ;; mv n* N
+mv O* O ;; mv o* O
+mv P* P ;; mv p* P
+mv Q* Q ;; mv q* Q
+mv R* R ;; mv r* R
+mv S* S ;; mv s* S
+mv T* T ;; mv t* T
+mv U* U ;; mv u* U
+mv V* V ;; mv v* V
+mv W* W ;; mv w* W
+mv X* X ;; mv x* X
+mv Y* Y ;; mv y* Y
+mv Z* Z ;; mv z* Z
+

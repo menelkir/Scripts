@@ -1,0 +1,30 @@
+#!/bin/bash
+#
+# Deorphan 1.1
+# (c) 2017 - Daniel Menelkir <menelkir@itroll.org>
+#
+# Check and remove unused orphans on the system
+#
+# Changelog
+# 1.0 - Initial Release
+# 1.1 - Show a message if there's no orphans instead of pacman error
+
+# Check if is running as root
+if [[ $EUID -ne 0 ]]; then
+	echo "";
+	echo "deorphan must be run as root";
+	echo "";
+	exit 1
+fi
+
+# Check if there's orphans and do the action
+
+ORPH=`pacman -Qtdq | wc -l`
+if [ $ORPH = 0 ];
+	then
+		echo "No orphans found in the system";
+		exit 0
+	else
+		pacman -Rns $(pacman -Qtdq);
+fi
+

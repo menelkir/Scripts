@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# pdf2epub 1.0
+# (c) 2018 - Daniel Menelkir <menelkir@itroll.org>
+#
+# A script to convert all pdfs in the actuall directory into epubs
+# Requires calibre to works
+#
+
+find ./ -iname "*pdf" -type f | while read f; do echo -e "\e[1mConverting file $f \e[0m" ; ebook-convert "$f" "${f%.pdf}.epub" --enable-heuristics ; done

@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# mp42webm 1.0
+#
+# Simple converter from mp4 to web
+
+ffmpeg -i "$1" -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis "$1".webm

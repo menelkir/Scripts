@@ -1,0 +1,14 @@
+#!/bin/bash
+echo -e "\e[1m\e[93m1.  \e[97mGenerating ldconfig"
+ldconfig
+echo -e "\e[1m\e[93m2.  \e[97mGenerating man-db"
+mandb -q 
+echo -e "\e[1m\e[93m3.  \e[97mScrub"
+btrfs scrub start -B /
+echo -e "\e[1m\e[93m4.  \e[97mDefrag"
+btrfs fi de -r /
+btrfs fi de -r /home
+echo -e "\e[1m\e[93m5.  \e[97mBalance"
+btrfs balance start /
+echo -e "\e[1m\e[93m6.  \e[97mDone"
+halt -p

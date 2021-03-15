@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Downloaded from http://lordfu.wordpress.com
+
+# Wallpaper directory
+WALLPAPERDIR="$HOME/Pictures/Wallpapers/Single"
+
+if [[ -d "${WALLPAPERDIR}" ]];
+then
+	while (true);
+	do files=$(ls "${WALLPAPERDIR}")
+		file_matrix=($files)
+		num_files=${#file_matrix[*]}
+		feh --bg-scale "${WALLPAPERDIR}/${file_matrix[$((RANDOM%num_files))]}"
+		# fbsetbg -c "${WALLPAPERDIR}/${file_matrix[$((RANDOM%num_files))]}"
+		exit 0
+	done
+fi
+exit 0

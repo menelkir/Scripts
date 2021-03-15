@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# lowercase 1.0
+#
+# Lowercase all files in a directory, because I'm lazy
+
+for f in *; do
+	test -f "$f" && mv "$f" "$( tr '[:upper:]' '[:lower:]' <<<"$f" )"
+done

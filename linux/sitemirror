@@ -1,0 +1,7 @@
+#!/bin/bash
+# 
+# sitemirror 1.0
+#
+# Just a script to make a mirror, what else
+
+time /usr/bin/wget -rmc -e robots=off $1

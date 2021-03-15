@@ -1,0 +1,23 @@
+#!/bin/bash
+# Bootable macOS creator 1.0
+# <C> 2016 - Daniel Menelkir <menelkir@itroll.org>
+# License: MIT
+#
+# Just a simple script to make a bootable macOS pendrive
+# Note that this will create a Sierra bootable pendrive, if you need
+# 	a different macOS, you should modify the the createinstallmedia
+#	app.
+#
+#
+# Todo:
+# 	Add more options like clover, extra kexts
+
+if [[ $1 = "" ]];
+then
+	echo "Usage: bootmacoscreator.sh <path to pendrive>";
+	exit 1;
+fi
+
+echo "Starting..."
+/Applications/Install\ macOS\ High\ Sierra.app/Contents/Resources/createinstallmedia --volume $1 --applicationpath /Applications/Install\ macOS\ High\ Sierra.app/
+

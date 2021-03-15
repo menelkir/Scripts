@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Rebuild AUR 1.0
+# (c) 2020 - Daniel Menelkir <menelkir@itroll.org>
+#
+# Rebuild all AUR packages
+#
+# Changelog
+# 1.0 - Initial Release
+
+# Check if is running as root
+if [[ $EUID == 0 ]]; then
+	echo "";
+	echo "rebuildaur shouldn't be supposed to run as root";
+	echo "";
+	exit 1
+fi
+
+AURHANDLER='/usr/bin/yay'
+$AURHANDLER -S `pacman -Qqm`

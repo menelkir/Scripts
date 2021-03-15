@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# cleancrap 1.0
+# (c) Daniel Menelkir - menelkir@itroll.org
+#
+# Clean .DS_Store and reindex
+#
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: cleancrap <path>";
+	exit 1
+fi
+
+# Prevent MDS from attempting to Index
+sudo touch $1/.metadata_never_index
+
+# Disable Indexing AND Searching of Volumes (if necessary)
+sudo mdutil -i off -d $1
+
+# Delete existing Spotlight Index (if necessary, to start over, whatever fits you).
+sudo rm -rfv $1/.Spotlight-V100
+
+# Disable creating '.DS_Store' bullshit on USB volumes
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# Disable creating '.DS_Store' bullshit on network volumes
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+
+# Now that you've cleaned the mess, remove this bullshit from your drives:
+find $1 -name ".DS_Store" -depth -exec rm {} \;

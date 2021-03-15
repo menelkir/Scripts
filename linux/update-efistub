@@ -1,0 +1,2 @@
+#!/bin/bash
+efibootmgr --disk /dev/sda --part 1 --create --label "Arch Linux" --loader /vmlinuz-linux-zen --unicode 'root=UUID=fc77a01c-25be-4e1e-a57d-e408dde3985e rw initrd=\intel-ucode.img initrd=\initramfs-linux-zen.img loglevel=3 rd.systemd.show_status=auto rd.udev.log_priority=3 biosdevname=0 net.ifnames=0 usbhid.quirks=0x413c:0x301a:0x00000400 vt.global_cursor_default=0 add_efi_memmap nowatchdog iomem=relaxed quiet splash'

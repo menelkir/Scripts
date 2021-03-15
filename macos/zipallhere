@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# zipallhere 1.0
+# (c) Daniel Menelkir <menelkir@itroll.org>
+#
+# zip a bunch of files individually on a directory (macOS version)
+#
+# Useful if you download romsets and the jerk compressed with somethin else.
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: zipallhere <extension of the files to be zipped>"
+	exit 1
+fi
+
+# Dirty Laundry
+find . -name ‘.DS_Store’ -type f -delete
+for i in *; do zip -r “${i%}.zip” “$i”; done
+

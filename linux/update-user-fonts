@@ -1,0 +1,4 @@
+cd $HOME/.fonts
+mkfontscale
+mkfontdir
+xset fp rehash

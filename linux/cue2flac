@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+# cue2flac 1.0
+#
+# Spplit those "one-file-per-album" into multiple flacs
+# Note that you should have one cue and one flac in the current directory
+#
+# You need flac  and shntools installed
+#
+
+# Splitting
+echo -e "\e[1m\e[93m2.  \e[97m Spliting flacs";
+shnsplit -f "*.cue" -o flac -t "%n - %t" "*.flac"
+
+# Delete flac and cue files after conversion
+echo -e "\e[1m\e[93m3.  \e[97mDeleting ape and cue files";
+rm *.flac
+rm *.cue
+
+echo -e "\e[1m\e[93m4.  \e[97mDone..."
+

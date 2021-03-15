@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Check if is running as root
+if [[ $EUID -ne 0 ]]; then
+	echo "";
+	echo "underclock must be run as root";
+	echo "";
+	exit 1
+fi
+
+if [[ $1 == "normal" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mBringing CPU back to normal";
+	cpupower frequency-set -d 1.6GHz -u 3.6GHz
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+if [[ $1 == "low" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mSetting CPU to lowest (1.6Ghz)";
+	cpupower frequency-set -d 1.6GHz -u 1.6GHz
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+if [[ $1 == "medium" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mSetting CPU to medium (2.3Ghz)";
+	cpupower frequency-set -d 1.6GHz -u 2.3GHz
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+if [[ $1 == "secure" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mSetting CPU to secure (2.0Ghz)";
+	cpupower frequency-set -d 1.6GHz -u 2.2GHz
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+echo "Usage: underclock low/medium/secure/normal";
+echo "";
+echo "		low 	= Max 1.6GHz"
+echo "		medium	= Min 1.6GHz | Max 2.3GHz"
+echo "		secure	= Min 1.6GHz | Max 2.0GHz"
+echo "		normal	= Min 1.6GHz | Max 3.6GHz"
+exit 1

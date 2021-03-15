@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# changeext 1.0
+# (c) Daniel Menelkir - menelkir@itroll.org
+#
+# Change extension of files in a directory
+# Because some emulators have issues to just use a file .rom and need some crap like .mx1 and .mx1 instead.
+#
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: $(basename "$0") <old extension> <new extension>";
+	exit 1
+fi
+
+# Dirty Laundry
+for f in *.$1;
+	do [ -f "$f" ] && mv -v "$f" "${f%$1}$2"
+done

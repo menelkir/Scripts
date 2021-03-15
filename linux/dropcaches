@@ -1,0 +1,54 @@
+#!/bin/bash
+#
+# dropcaches 1.1
+# (c) Daniel Menelkir <menelkir@itroll.org>
+#
+# Paranoic sync and drop caches
+# Because some piece of software can be called piece of shit and can deal properly with ram management
+#
+# changelog:
+#
+# 1.0 - First version
+# 1.1 - Some precautionary options for btrfs
+#
+
+# Check if is running as root
+if [[ $EUID -ne 0 ]]; then
+	echo ""
+	echo "dropcaches must be run as root";
+	echo ""
+	exit 1
+fi
+
+# Show actual memory usage, for measure
+free -h
+
+# Sync (yes, two times), better safe than sorry
+sync && sync
+
+##### This could be commented if you don't use btrfs
+# Make a sync to every single subvolume you have, just to be sure everything is on place
+# btrfs subvolume sync /
+# btrfs subvolume sync /home
+##### 
+
+# Timed to measure in old machines, remove if you don't like it
+# Change the number of the echo like this:
+#	1 - Clean PageCache only
+#	2 - Clean dentries and inodes on cache
+#	3 - Clean PageCache, dentries and inodes on cache
+#
+# In production environment, I suggest using only 1 if you're in need
+time echo 3 > /proc/sys/vm/drop_caches
+sync
+
+# Clean swap
+
+SWAP=`swapon -s | awk 'FNR == 2 {print $1}'`
+if [ -z $SWAP ];
+	then echo "Swap Disabled/Non-Existent, skipping";
+	else swapoff $SWAP && swapon $SWAP
+fi
+
+# Last check for comparison
+echo && free -h

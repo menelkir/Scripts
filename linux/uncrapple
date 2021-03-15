@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+# UncrAPPLE 1.1 - A script to remove apple crap
+#
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: $(basename "$0") <path>";
+	exit 1
+fi
+
+echo -e "\e[1m\e[93m1.  \e[97mRemoving the ._. bullshit"
+	find $1 -iname '._*' -exec rm {} \;
+
+echo -e "\e[1m\e[93m2.  \e[97mRemoving .DS_Store and .AppleDouble crap"
+	find $1 -iname '.DS_Store' -exec rm {} \;
+	find ./ -depth -name ".AppleDouble" -exec rm -rf {} \;
+
+echo -e "\e[1m\e[93m3.  \e[97mRemoving Spotlight directory"
+	sudo rm -rf $1/.Spotlight-V100
+
+	echo -e "\e[1m\e[93m4.  \e[97mRemove ._ crap (make sure you had revised this first!)"
+	find . -type f -name '._*' -delete
+	
+echo -e "\e[1m\e[93m5.  \e[97mDone"
+

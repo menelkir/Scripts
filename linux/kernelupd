@@ -1,0 +1,43 @@
+#!/bin/bash
+#
+# kernelupd 1.3
+#
+# (c) 2017 - Daniel Menelkir <menelkir@itroll.org>
+#
+# Just a kernel+initramfs+ucode updater for Arch Linux
+# Keep in mind that it's a easier solution for someone that prefer having
+# kernel and initrd inside a directory on UEFI.
+#
+# Feel free to use
+
+# Check if is running as root
+if [[ $EUID -ne 0 ]]; then
+	echo "";
+	echo "kernelupd must be run as root";
+	echo "";
+	exit 1
+fi
+
+echo -e "\e[1m\e[93m1.  \e[97mMount ESP Partition"
+	umount /boot/efi
+	/sbin/fsck.msdos /dev/sda1
+	mount /boot/efi
+
+echo -e "\e[1m\e[93m1.  \e[97mUpdating Intel Microcode..."
+	cp /boot/intel-ucode.img /boot/efi/EFI/Linux/
+	cp /boot/intel-ucode.img /boot/efi/EFI/ArchLinux/
+
+echo -e "\e[1m\e[93m2.  \e[97mUpdating Arch Linux Initramfs..."
+	mkinitcpio -P
+	cp /boot/initramfs-linux.img /boot/efi/EFI/Linux/initrd.img
+	cp /boot/initramfs-linux510-tkg-upds.img /boot/efi/EFI/ArchLinux/initrd.img
+
+echo -e "\e[1m\e[93m3.  \e[97mCopying Official Arch Linux Kernel..."
+	cp /boot/vmlinuz-linux /boot/efi/EFI/Linux/vmlinuz.efi
+	cp /boot/vmlinuz-linux510-tkg-upds /boot/efi/EFI/ArchLinux/vmlinuz.efi
+	
+echo -e "\e[1m\e[93m3.  \e[97mSyncronizing..."
+	sync
+
+echo -e "\e[1m\e[93m4.  \e[97mDone..."
+

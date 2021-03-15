@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# weather 1.0
+# (c) Daniel Menelkir - menelkir@itroll.org
+#
+# Simple script to get weather for any city
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo -e "\e[31mUsage: \e[37m$(basename "$0") \e[33m<city>";
+	echo "";
+	echo -e "\e[37mUse _ instead of spaces in the city name";
+	exit 1
+fi
+
+curl wttr.in/$1

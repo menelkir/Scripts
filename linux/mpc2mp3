@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# mpc2mp3 1.0
+#
+# Convert mpc to mp3 without losing quality
+# It works with all files in a specific directory
+
+# Converting files to mp3
+echo -e "\e[1m\e[93m1.  \e[97m Converting files to wav";
+for mpc in *.mpc; do
+	ffmpeg -stats -v 5 -y -i "${mpc}" "${mpc%.mpc}.wav";
+done
+
+# Delete remaining mpc
+echo -e "\e[1m\e[93m2.  \e[97mDeleting mpc files";
+rm *.mpc
+
+# Encoding to mp3
+echo -e "\e[1m\e[93m3.  \e[97mEnconding all wav to max quality mp3";
+for wav in *.wav;
+	do lame -V0 --preset extreme -h "${wav}" "${wav%.wav}.mp3";
+done
+
+# Deleting remaining wav files
+echo -e "\e[1m\e[93m4.  \e[97mDeleting wav files";
+rm *.wav
+
+echo -e "\e[1m\e[93m5.  \e[97mDone..."
+

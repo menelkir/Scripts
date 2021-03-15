@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# update-repo-metadata 1.0
+# (c) Daniel Menelkir - menelkir@itroll.org
+#
+# Update repository metadata
+#
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: $(basename "$0") <repository>";
+	exit 1
+fi
+
+# Dirty Laundry
+egencache --jobs=9 --update --repo $1

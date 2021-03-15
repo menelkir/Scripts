@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# wma2mp3 1.0
+#
+# Convert flac to mp3 without losing quality
+# It works with all files in a specific directory
+
+for wma in *.wma; do
+	mplayer -vo null -vc dummy -af resample=44100 -ao pcm:waveheader "$wma" && lame -b 256 -B 320 --lowpass 20094 -h audiodump.wav -o "${wma%.wma}.mp3";
+done
+
+# Delete remaining wav and wma
+rm *.wav
+rm *.wma
+

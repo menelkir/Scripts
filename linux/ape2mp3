@@ -1,0 +1,34 @@
+#!/bin/bash
+#
+# ape2mp3 1.0
+#
+# Split those "one-file-per-album" into multiple mp3s
+# Note that you should have one cue and one ape in the directory
+#
+
+# You have to convert ape to flac first because some jitters occuring
+# Blame ape format and who uses this dreadful crap format
+echo -e "\e[1m\e[93m1.  \e[97m Converting to flac";
+	ffmpeg -i *.ape *.flac
+
+# Splitting
+echo -e "\e[1m\e[93m2.  \e[97m Spliting flac files to wav";
+	shnsplit -f *.cue -t "%n - %t" *.flac
+
+# Delete flac and cue files after conversion
+echo -e "\e[1m\e[93m3.  \e[97mDeleting ape and cue files";
+	rm *.ape
+	rm *.cue
+
+# Converting wav to mp3
+echo -e "\e[1m\e[93m4.  \e[97mEnconding all wav to max quality mp3";
+	for wav in *.wav;
+		do lame -V0 --preset extreme -h "${wav}" "${wav%.wav}.mp3";
+	done
+
+# Deleting remaining wav files
+echo -e "\e[1m\e[93m5.  \e[97mDeleting wav files";
+	rm *.wav
+	rm *.flac
+echo -e "\e[1m\e[93m6.  \e[97mDone..."
+

@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Check if is running as root
+if [[ $EUID -ne 0 ]]; then
+	echo "";
+	echo "tmutil must be run as root";
+	echo "";
+	exit 1
+fi
+
+if [[ $1 == "start" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mStarting Time Machine Services";
+	# systemctl start smbd.service
+	# systemctl start nmbd.service
+	# systemctl start winbindd
+	systemctl start netatalk
+	systemctl start avahi-daemon.service
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+if [[ $1 == "restart" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mRestarting Time Machine Services";
+	# systemctl restart smbd.service
+	# systemctl restart nmbd.service
+	# systemctl restart winbindd
+	systemctl restart netatalk
+	systemctl restart avahi-daemon.service
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+if [[ $1 == "stop" ]]; then
+	echo -e "\e[1m\e[93m1.  \e[97mStoping Time Machine Services";
+	# systemctl stop smbd.service
+	# systemctl stop nmbd.service
+	# systemctl stop winbindd
+	systemctl stop netatalk
+	systemctl stop avahi-daemon.service
+	echo -e "\e[1m\e[93m2.  \e[97mDone";
+	exit 1
+fi
+
+echo "Usage: tmutil start/stop/restart";
+exit 1

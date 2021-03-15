@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# zipallhere 1.0
+# (c) Daniel Menelkir <menelkir@itroll.org>
+#
+# zip a bunch of files individually on a directory
+#
+# Useful if you download romsets and the jerk compressed with somethin else.
+
+# Usage
+if [[ $1 == "" ]]; then
+	echo "Usage: $(basename "$0") <extension of the files to be zipped>"
+	exit 1
+fi
+
+# Dirty Laundry
+for e in *.$1; 
+	do zip "${e%.$1}".zip "$e"; 
+done
+
